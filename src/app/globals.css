@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cont {
+  max-width: 90%;
+  margin: 0 auto;
+
+  /* max-w-[90%] mx-auto */
+}
+/* section {
+  margin-top: 100px;
+} */
+/* font-sf-pro-display */
+html::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #3a8dde;
+  border-radius: 5rem;
+}
+
+.hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+.box {
+  width: 200px;
+  height: 200px;
+  background: #303841;
+}
+body {
+  overflow-x: hidden;
+}
+.rounded-image {
+  width: 100px; /* Adjust the width as per your requirement */
+  border-radius: 50%;
+}
