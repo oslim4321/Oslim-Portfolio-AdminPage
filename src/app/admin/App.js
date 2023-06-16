@@ -12,6 +12,7 @@ import {
   editProject,
   fetchItemsByCategory,
   getProjectById,
+  uploadProject,
 } from "@/lib/QueryFirebase";
 import { ProjectEdit, ProjectList } from "./Compo";
 import ProjectCreate from "./ProjectCreate";
@@ -76,18 +77,18 @@ const Apps = () => {
       // Implementation for creating a new record
       const { data } = params;
       console.log(data, "here o am");
-      // try {
-      //   // Perform the necessary operations to create the new record
-      //   const createdRecord = await createRecord(resource, data);
-      //   return {
-      //     data: createdRecord,
-      //   };
-      // } catch (error) {
-      //   console.error("Error creating record:", error);
-      //   return {
-      //     error: error.message || "Error creating record",
-      //   };
-      // }
+      try {
+        // Perform the necessary operations to create the new record
+        const createdRecord = await uploadProject(data);
+        return {
+          data: createdRecord,
+        };
+      } catch (error) {
+        console.error("Error creating record:", error);
+        return {
+          error: error.message || "Error creating record",
+        };
+      }
     },
   };
 

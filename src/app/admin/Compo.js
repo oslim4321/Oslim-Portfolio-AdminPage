@@ -16,6 +16,7 @@ import {
   ImageInput,
   ArrayInput,
   SimpleFormIterator,
+  DeleteButton,
 } from "react-admin";
 
 export const ProjectList = (props) => {
@@ -47,6 +48,7 @@ export const ProjectList = (props) => {
         <TextField source="category" />
         {/* Add other fields you want to display */}
         <EditButton />
+        <DeleteButton />
       </Datagrid>
     </List>
   );
