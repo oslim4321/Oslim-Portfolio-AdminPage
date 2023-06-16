@@ -9,6 +9,8 @@ import {
 } from "react-admin";
 
 import {
+  deleteProjectAndImages,
+  deleteProjectById,
   editProject,
   fetchItemsByCategory,
   getProjectById,
@@ -90,6 +92,49 @@ const Apps = () => {
         };
       }
     },
+    /* delete */
+    delete: async (resource, params) => {
+      const { id } = params;
+      console.log(id);
+
+      try {
+        // Perform the necessary operations to delete the resource
+        const deletedDoc = await deleteProjectById(id);
+        console.log("deleted");
+        // Return the deleted resource ID
+        return { data: deletedDoc };
+      } catch (error) {
+        console.error("Error deleting record:", error);
+        return { error };
+      }
+    },
+
+    // delete: async (resource, params) => {
+    //   const { id } = params;
+
+    //   try {
+    //     // Get the project data to retrieve the image URLs
+    //     const project = await getProjectById(id);
+
+    //     const projectImages = project.projectImages ?? [];
+    //     const image = project.image;
+
+    //     console.log(image, "image");
+    //     console.log(projectImages, "projectImage");
+
+    //     // Extract the image URLs from the project data
+    //     const imageUrls = projectImages.map((image) => image.url);
+
+    //     // Perform the necessary operations to delete the resource and its associated images
+    //     const docDel = await deleteProjectAndImages(id, image, imageUrls);
+
+    //     // Return the deleted resource ID
+    //     return { data: docDel };
+    //   } catch (error) {
+    //     console.error("Error deleting record:", error);
+    //     return { error };
+    //   }
+    // },
   };
 
   return (
