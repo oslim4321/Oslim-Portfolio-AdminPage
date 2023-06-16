@@ -72,7 +72,23 @@ const Apps = () => {
       }
     },
 
-    // Implement other dataProvider methods as per your requirement
+    create: async (resource, params) => {
+      // Implementation for creating a new record
+      const { data } = params;
+      console.log(data, "here o am");
+      // try {
+      //   // Perform the necessary operations to create the new record
+      //   const createdRecord = await createRecord(resource, data);
+      //   return {
+      //     data: createdRecord,
+      //   };
+      // } catch (error) {
+      //   console.error("Error creating record:", error);
+      //   return {
+      //     error: error.message || "Error creating record",
+      //   };
+      // }
+    },
   };
 
   return (
