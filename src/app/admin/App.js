@@ -1,7 +1,11 @@
 import * as React from "react";
 import { Admin, Resource } from "react-admin";
 
-import { fetchItemsByCategory } from "@/lib/QueryFirebase";
+import {
+  editProject,
+  fetchItemsByCategory,
+  getProjectById,
+} from "@/lib/QueryFirebase";
 import { ProjectEdit, ProjectList } from "./Compo";
 
 const Apps = () => {
@@ -24,6 +28,32 @@ const Apps = () => {
           data: [],
           total: 0,
         };
+      }
+    },
+
+    getOne: async (resource, params) => {
+      const { id } = params;
+      console.log(resource, "resourse");
+      console.log(params, "params");
+      try {
+        const project = await getProjectById(id);
+        console.log(project, "proj");
+        return { data: project };
+      } catch (error) {
+        console.error("Error fetching item:", error);
+        return { data: null };
+      }
+    },
+
+    update: async (resource, params) => {
+      const { id, data } = params;
+      console.log(id, "id", data, "data");
+      try {
+        const res = await editProject(id, data);
+        return { data: res };
+      } catch (error) {
+        console.log("Error uodating data", error);
+        return { data: null };
       }
     },
 

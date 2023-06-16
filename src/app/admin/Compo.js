@@ -8,15 +8,23 @@ import {
   SimpleForm,
   Sidebar,
   MenuItemLink,
+  Link,
+  TextInput,
+  FormTab,
+  TabbedForm,
+  SelectInput,
+  ImageInput,
+  ArrayInput,
+  SimpleFormIterator,
 } from "react-admin";
 
 export const ProjectList = (props) => {
-  const handleEditClick = (id) => {
-    console.log(id, "id");
-  };
-  const RenderEditButton = (record) => (
-    <EditButton onClick={() => handleEditClick(record)} />
-  );
+  // const getEditUrl = (record) => {
+  //   const projectId = record.id; // Get the ID of the project
+  //   console.log(projectId, "projectId");
+  //   return `/projects/${projectId}/edit`; // Construct the edit URL with the ID parameter
+  // };
+
   return (
     <List {...props}>
       <Datagrid>
@@ -37,38 +45,76 @@ export const ProjectList = (props) => {
         <TextField source="projectName" />
         <TextField source="studentName" />
         <TextField source="category" />
-
         {/* Add other fields you want to display */}
-        <RenderEditButton />
+        <EditButton />
       </Datagrid>
     </List>
   );
 };
 
-export const ProjectEdit = (props) => (
-  <Edit {...props}>
-    <SimpleForm>
-      <ImageField
-        source="image"
-        title="Project Image"
-        className="rounded-image" // Apply custom CSS class
-        options={{
-          style: {
-            width: "200px", // Specify the desired width
-            height: "auto", // Set height to auto to maintain aspect ratio
-            borderRadius: "10px", // Specify the desired border radius
-          },
-        }}
-      />
-      <TextField source="id" />
-      <TextField source="projectName" />
-      <TextField source="studentName" />
-      <TextField source="category" />
+export const ProjectEdit = (props) => {
+  const handleSubmit = async (values) => {
+    // Perform the save operation here
+    const { id, ...data } = values; // Extract the ID and other data from the form values
+    console.log(values);
+    //  try {
+    //    await updateProject(id, data); // Assuming you have a function to update the project in the database
+    //    // Handle success, e.g., show a success message or navigate to another page
+    //  } catch (error) {
+    //    // Handle error, e.g., show an error message
+    //  }
+  };
+  return (
+    <Edit {...props}>
+      <TabbedForm>
+        <FormTab label="Details">
+          <ImageField source="image" title="Project Image" />
 
-      {/* Add other fields you want to edit */}
-    </SimpleForm>
-  </Edit>
-);
+          <ImageInput
+            source="image"
+            label="Project Image"
+            accept="image/*"
+            multiple={false}
+          ></ImageInput>
+          <TextInput source="projectName" label="Project Name" />
+          <TextInput source="studentName" label="Student Name" />
+          <TextInput source="gitHubLink" label="Github Link" />
+          <TextInput source="projectLink" label="Project Link" />
+          <SelectInput
+            source="category"
+            label="Category"
+            defaultValue="category"
+            choices={[
+              { id: "client-work", name: "Client Work" },
+              { id: "personal-projects", name: "Personal Projects" },
+              { id: "school-project", name: "School Project" },
+              { id: "freelance-projects", name: "Freelance Projects" },
+              { id: "my-css-student-works", name: "My CSS Student Works" },
+            ]}
+          />
+          {/* Add other fields you want to edit */}
+        </FormTab>
+        <FormTab label="Description">
+          <TextInput
+            source="projectDesc"
+            label="Project Description"
+            multiline
+            fullWidth
+            style={{ width: "100%" }}
+          />
+          {/* Add other fields you want to edit */}
+        </FormTab>
+        <FormTab label="Technologies">
+          <ArrayInput source="technologies" label="Technologies">
+            <SimpleFormIterator>
+              <TextInput />
+            </SimpleFormIterator>
+          </ArrayInput>
+        </FormTab>
+      </TabbedForm>
+    </Edit>
+  );
+};
 
 const customProjectDescField = (props) => {
   const { record } = props;
