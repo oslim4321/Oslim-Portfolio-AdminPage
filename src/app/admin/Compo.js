@@ -85,7 +85,6 @@ export const ProjectEdit = (props) => {
           <SelectInput
             source="category"
             label="Category"
-            defaultValue="category"
             choices={[
               { id: "client-work", name: "Client Work" },
               { id: "personal-projects", name: "Personal Projects" },

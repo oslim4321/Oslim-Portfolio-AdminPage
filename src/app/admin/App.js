@@ -82,9 +82,7 @@ const Apps = () => {
       try {
         // Perform the necessary operations to create the new record
         const createdRecord = await uploadProject(data);
-        return {
-          data: createdRecord,
-        };
+        return { data: createdRecord };
       } catch (error) {
         console.error("Error creating record:", error);
         return {
