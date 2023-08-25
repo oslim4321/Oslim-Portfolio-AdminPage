@@ -1,17 +1,12 @@
 import React from "react";
-import AddProject from "./UploadProject/AddProject";
 import "./globals.css";
-import { Link } from "react-admin";
+import Link from "next/link";
 
 const page = async () => {
   return (
     <section>
-      {/* <AddProject /> */}
-      <h1>Welcomr Admin Go to dashboard</h1>
-      <Link href="/admin">
-        {" "}
-        <button>Go Dashboard</button>
-      </Link>
+      <h1>Welcome Admin Go to dashboard</h1>
+      <Link href="/admin"> Go Dashboard</Link>
     </section>
   );
 };
